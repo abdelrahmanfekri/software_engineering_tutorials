@@ -113,6 +113,41 @@
     - Reward modeling and human feedback
     - RLHF implementation and best practices
 
+18. **[Knowledge Graphs and Knowledge-Augmented NLP](18-knowledge-graphs-knowledge-augmented-nlp.md)**
+    - Knowledge graph construction and querying
+    - Knowledge graph embeddings (TransE, DistMult)
+    - Retrieval-augmented generation (RAG)
+    - Entity linking and knowledge base completion
+    - Knowledge-augmented language models
+
+19. **[Agentic AI and Autonomous Systems](19-agentic-ai-autonomous-systems.md)**
+    - ReAct agents (Reasoning + Acting)
+    - Memory systems and planning
+    - Multi-agent collaboration
+    - Self-improving agents with reflection
+    - Tool use and function calling
+    - LangChain and agent frameworks
+
+20. **[Conformal Prediction and Uncertainty Quantification](20-conformal-prediction-uncertainty-quantification.md)**
+    - Conformal prediction theory and guarantees
+    - Classification with prediction sets
+    - Adaptive conformal prediction
+    - Sequence labeling with uncertainty
+    - Generation with confidence quantification
+    - Calibration diagnostics
+
+### Part VII: Artificial General Intelligence (Module 21)
+
+21. **[AGI and Cognitive Architectures](21-agi-cognitive-architectures.md)** 🧠
+    - Theoretical foundations of AGI
+    - Cognitive architectures (ACT-R, Soar, OpenCog)
+    - Meta-learning and learning to learn
+    - Lifelong and continual learning systems
+    - Consciousness and self-awareness models
+    - Neuro-symbolic integration
+    - Embodied intelligence
+    - Path from narrow AI to AGI
+
 ## Learning Paths
 
 ### Beginner Path (Modules 1-7)
@@ -133,20 +168,39 @@ For those with basic NLP knowledge:
 4. Learn prompt engineering
 5. Understand in-context learning
 
-### Advanced Path (Modules 12-15)
+### Advanced Path (Modules 12-17)
 For experienced practitioners:
 1. Large language model training
 2. Model evaluation and alignment
 3. Multimodal applications
 4. Advanced reasoning systems
+5. Explainable AI techniques
+6. Reinforcement learning for NLP
+
+### Expert Path (Modules 18-21)
+For cutting-edge research and AGI:
+1. Knowledge graphs and RAG systems
+2. Agentic AI and autonomous systems
+3. Conformal prediction and uncertainty quantification
+4. **AGI and cognitive architectures**
+5. Building intelligent systems toward general intelligence
 
 ### Specialized Tracks
 
 #### Research Track
-- Focus on Modules 8-13
+- Focus on Modules 8-13, 18-21
 - Deep dive into architectures
 - Emphasis on training and evaluation
 - Advanced mathematical concepts
+- Cutting-edge research frontiers
+
+#### PhD/Academic Track
+- Modules 8-13, 15-21
+- AGI and cognitive architectures
+- Meta-learning and continual learning
+- Neuro-symbolic integration
+- Consciousness and self-awareness
+- Research methodology
 
 #### Industry Track
 - Modules 1-7, 9, 11, 14
@@ -155,10 +209,11 @@ For experienced practitioners:
 - Business considerations
 
 #### AI Safety Track
-- Modules 9, 11, 13, 15
+- Modules 9, 11, 13, 15, 21
 - Bias and fairness
 - Alignment techniques
 - Safety evaluation
+- AGI safety considerations
 - Advanced reasoning
 
 ## Prerequisites
