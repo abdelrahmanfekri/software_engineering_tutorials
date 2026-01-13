@@ -3,6 +3,7 @@
 ## 📦 Installing Go
 
 ### macOS
+
 ```bash
 # Using Homebrew
 brew install go
@@ -12,6 +13,7 @@ brew install go
 ```
 
 ### Linux
+
 ```bash
 # Ubuntu/Debian
 sudo apt update
@@ -24,6 +26,7 @@ sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
 ```
 
 ### Windows
+
 1. Download installer from [golang.org/dl](https://golang.org/dl/)
 2. Run the MSI installer
 3. Follow installation wizard
@@ -31,6 +34,7 @@ sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
 ## 🔧 Environment Setup
 
 ### Set GOPATH (Optional in modern Go)
+
 ```bash
 # Add to ~/.bashrc, ~/.zshrc, or equivalent
 export GOPATH=$HOME/go
@@ -38,6 +42,7 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 ```
 
 ### Verify Installation
+
 ```bash
 go version
 # Output: go version go1.21.5 darwin/amd64
@@ -48,7 +53,6 @@ go env
 
 ## 🏗️ Project Structure
 
-Modern Go uses modules (Go 1.11+). No GOPATH required!
 
 ```
 my-project/
@@ -71,17 +75,20 @@ my-project/
 ## 🎯 Your First Go Program
 
 ### Step 1: Create a directory
+
 ```bash
 mkdir hello-world
 cd hello-world
 ```
 
 ### Step 2: Initialize a module
+
 ```bash
 go mod init example.com/hello
 ```
 
 This creates `go.mod`:
+
 ```
 module example.com/hello
 
@@ -89,6 +96,7 @@ go 1.21
 ```
 
 ### Step 3: Create main.go
+
 ```go
 package main
 
@@ -100,6 +108,7 @@ func main() {
 ```
 
 ### Step 4: Run the program
+
 ```bash
 # Run directly
 go run main.go
@@ -152,11 +161,13 @@ go doc fmt.Println
 ## 📝 IDE Setup
 
 ### Visual Studio Code (Recommended)
+
 1. Install VS Code
 2. Install "Go" extension by Google
 3. Install tools when prompted: `gopls`, `dlv`, `staticcheck`
 
 Features:
+
 - IntelliSense
 - Auto-completion
 - Debugging
@@ -164,9 +175,11 @@ Features:
 - Auto-formatting on save
 
 ### GoLand (JetBrains)
+
 Professional IDE with excellent Go support (paid).
 
 ### Vim/Neovim
+
 - Install `vim-go` plugin
 - Or use LSP with `gopls`
 
@@ -209,11 +222,13 @@ golangci-lint run
 ## 📚 Understanding Go Modules
 
 ### Create a new module
+
 ```bash
 go mod init example.com/myproject
 ```
 
 ### Add a dependency
+
 ```bash
 # Automatically added when you import and run/build
 go get github.com/gin-gonic/gin
@@ -223,6 +238,7 @@ go get github.com/gin-gonic/gin@v1.9.0
 ```
 
 ### go.mod example
+
 ```go
 module example.com/myproject
 
@@ -235,6 +251,7 @@ require (
 ```
 
 ### Update dependencies
+
 ```bash
 # Update all to latest
 go get -u ./...
@@ -271,6 +288,7 @@ func main() {
 ```
 
 Build and run:
+
 ```bash
 go build -o hello
 ./hello World
@@ -307,7 +325,7 @@ func main() {
 
     name := os.Args[1]
     currentTime := time.Now().Format("15:04:05")
-    
+  
     fmt.Printf("Hello, %s!\n", name)
     fmt.Printf("Current time: %s\n", currentTime)
 }
@@ -324,4 +342,3 @@ func main() {
 ## 📖 Next Steps
 
 Continue to [Chapter 2: Basics](02-basics.md) to learn about variables, types, and control flow.
-

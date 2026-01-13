@@ -693,15 +693,723 @@ class FinancialLLMFineTuner:
 
 This module demonstrates cutting-edge LLM applications in finance, from basic analysis to advanced RAG systems and fine-tuning.
 
+## Advanced LLM Techniques for Finance
+
+### Tool-Use and Function Calling for Financial Analysis
+
+Modern LLMs can invoke external tools and APIs, enabling real-time data retrieval and computation.
+
+```python
+import json
+from typing import List, Dict, Callable, Any
+from openai import OpenAI
+from pydantic import BaseModel, Field
+
+class FinancialTool(BaseModel):
+    """Base class for financial analysis tools"""
+    name: str
+    description: str
+    parameters: Dict[str, Any]
+
+class ToolEnabledFinancialAgent:
+    """Financial agent with tool-use capabilities"""
+    
+    def __init__(self, api_key: str, model: str = "gpt-4-turbo"):
+        self.client = OpenAI(api_key=api_key)
+        self.model = model
+        self.tools = self._define_tools()
+        self.tool_functions = self._register_tool_functions()
+        
+    def _define_tools(self) -> List[Dict]:
+        """Define available tools for the LLM"""
+        return [
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_stock_price",
+                    "description": "Get current stock price and key metrics for a ticker symbol",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "ticker": {
+                                "type": "string",
+                                "description": "Stock ticker symbol (e.g., AAPL, MSFT)"
+                            }
+                        },
+                        "required": ["ticker"]
+                    }
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_financial_statements",
+                    "description": "Retrieve financial statements for a company",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "ticker": {"type": "string"},
+                            "statement_type": {
+                                "type": "string",
+                                "enum": ["income", "balance_sheet", "cash_flow"]
+                            },
+                            "period": {
+                                "type": "string",
+                                "enum": ["quarterly", "annual"]
+                            }
+                        },
+                        "required": ["ticker", "statement_type"]
+                    }
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "calculate_dcf_valuation",
+                    "description": "Calculate DCF valuation for a company",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "ticker": {"type": "string"},
+                            "growth_rate": {"type": "number"},
+                            "terminal_growth": {"type": "number"},
+                            "discount_rate": {"type": "number"}
+                        },
+                        "required": ["ticker"]
+                    }
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "get_news_sentiment",
+                    "description": "Get recent news and sentiment analysis for a company",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "ticker": {"type": "string"},
+                            "num_articles": {"type": "integer", "default": 5}
+                        },
+                        "required": ["ticker"]
+                    }
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "screen_stocks",
+                    "description": "Screen stocks based on financial criteria",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "market_cap_min": {"type": "number"},
+                            "pe_max": {"type": "number"},
+                            "dividend_yield_min": {"type": "number"},
+                            "sector": {"type": "string"}
+                        }
+                    }
+                }
+            },
+            {
+                "type": "function",
+                "function": {
+                    "name": "backtest_strategy",
+                    "description": "Backtest a trading strategy on historical data",
+                    "parameters": {
+                        "type": "object",
+                        "properties": {
+                            "strategy_type": {
+                                "type": "string",
+                                "enum": ["momentum", "mean_reversion", "value", "trend_following"]
+                            },
+                            "tickers": {
+                                "type": "array",
+                                "items": {"type": "string"}
+                            },
+                            "start_date": {"type": "string"},
+                            "end_date": {"type": "string"}
+                        },
+                        "required": ["strategy_type", "tickers"]
+                    }
+                }
+            }
+        ]
+    
+    def _register_tool_functions(self) -> Dict[str, Callable]:
+        """Map tool names to actual functions"""
+        return {
+            "get_stock_price": self._get_stock_price,
+            "get_financial_statements": self._get_financial_statements,
+            "calculate_dcf_valuation": self._calculate_dcf_valuation,
+            "get_news_sentiment": self._get_news_sentiment,
+            "screen_stocks": self._screen_stocks,
+            "backtest_strategy": self._backtest_strategy
+        }
+    
+    def _get_stock_price(self, ticker: str) -> Dict:
+        # In production, use real API like yfinance or Bloomberg
+        return {
+            "ticker": ticker,
+            "price": 185.50,
+            "change_percent": 1.25,
+            "volume": 52_000_000,
+            "market_cap": "2.85T",
+            "pe_ratio": 28.5,
+            "52_week_high": 199.62,
+            "52_week_low": 143.90
+        }
+    
+    def _get_financial_statements(self, ticker: str, statement_type: str, period: str = "quarterly") -> Dict:
+        return {
+            "ticker": ticker,
+            "statement_type": statement_type,
+            "period": period,
+            "data": {
+                "revenue": 94_836_000_000,
+                "net_income": 22_956_000_000,
+                "eps": 1.52,
+                "gross_margin": 0.438
+            }
+        }
+    
+    def _calculate_dcf_valuation(
+        self, ticker: str, growth_rate: float = 0.08, 
+        terminal_growth: float = 0.025, discount_rate: float = 0.10
+    ) -> Dict:
+        return {
+            "ticker": ticker,
+            "fair_value": 195.50,
+            "current_price": 185.50,
+            "upside": "5.4%",
+            "assumptions": {
+                "growth_rate": growth_rate,
+                "terminal_growth": terminal_growth,
+                "discount_rate": discount_rate
+            }
+        }
+    
+    def _get_news_sentiment(self, ticker: str, num_articles: int = 5) -> Dict:
+        return {
+            "ticker": ticker,
+            "overall_sentiment": 0.72,
+            "sentiment_label": "Bullish",
+            "num_articles": num_articles,
+            "key_topics": ["earnings beat", "AI expansion", "services growth"]
+        }
+    
+    def _screen_stocks(self, **criteria) -> List[Dict]:
+        return [
+            {"ticker": "AAPL", "name": "Apple Inc.", "match_score": 0.95},
+            {"ticker": "MSFT", "name": "Microsoft Corp.", "match_score": 0.92}
+        ]
+    
+    def _backtest_strategy(
+        self, strategy_type: str, tickers: List[str],
+        start_date: str = "2020-01-01", end_date: str = "2024-01-01"
+    ) -> Dict:
+        return {
+            "strategy": strategy_type,
+            "total_return": 0.85,
+            "annualized_return": 0.17,
+            "sharpe_ratio": 1.45,
+            "max_drawdown": -0.12
+        }
+    
+    def chat(self, user_message: str, conversation_history: List[Dict] = None) -> str:
+        """Process user message with tool calling support"""
+        if conversation_history is None:
+            conversation_history = []
+        
+        messages = [
+            {"role": "system", "content": """You are an expert financial analyst AI assistant. 
+            You have access to financial data tools. Use them to provide accurate, data-driven analysis.
+            Always cite your data sources and explain your reasoning."""}
+        ] + conversation_history + [{"role": "user", "content": user_message}]
+        
+        response = self.client.chat.completions.create(
+            model=self.model,
+            messages=messages,
+            tools=self.tools,
+            tool_choice="auto"
+        )
+        
+        assistant_message = response.choices[0].message
+        
+        # Process tool calls if any
+        if assistant_message.tool_calls:
+            messages.append(assistant_message)
+            
+            for tool_call in assistant_message.tool_calls:
+                function_name = tool_call.function.name
+                function_args = json.loads(tool_call.function.arguments)
+                
+                # Execute the tool
+                if function_name in self.tool_functions:
+                    result = self.tool_functions[function_name](**function_args)
+                    
+                    messages.append({
+                        "role": "tool",
+                        "tool_call_id": tool_call.id,
+                        "content": json.dumps(result)
+                    })
+            
+            # Get final response with tool results
+            final_response = self.client.chat.completions.create(
+                model=self.model,
+                messages=messages
+            )
+            
+            return final_response.choices[0].message.content
+        
+        return assistant_message.content
+```
+
+### Multi-Agent Financial Analysis with LangGraph
+
+```python
+from typing import TypedDict, Annotated, Sequence
+import operator
+
+class FinancialAgentState(TypedDict):
+    """State shared between agents"""
+    messages: Annotated[Sequence[dict], operator.add]
+    ticker: str
+    analysis_results: dict
+    final_recommendation: str
+
+class MultiAgentFinancialSystem:
+    """Multi-agent system using LangGraph-style architecture"""
+    
+    def __init__(self, api_key: str):
+        self.client = OpenAI(api_key=api_key)
+        self.agents = {
+            "fundamental_analyst": self._create_fundamental_agent(),
+            "technical_analyst": self._create_technical_agent(),
+            "risk_analyst": self._create_risk_agent(),
+            "portfolio_manager": self._create_portfolio_manager()
+        }
+        
+    def _create_fundamental_agent(self) -> dict:
+        return {
+            "name": "Fundamental Analyst",
+            "system_prompt": """You are a fundamental analyst specializing in:
+            - Financial statement analysis
+            - Valuation (DCF, comparable companies)
+            - Industry and competitive analysis
+            - Management quality assessment
+            Provide detailed, quantitative analysis."""
+        }
+    
+    def _create_technical_agent(self) -> dict:
+        return {
+            "name": "Technical Analyst", 
+            "system_prompt": """You are a technical analyst specializing in:
+            - Chart pattern recognition
+            - Technical indicators (RSI, MACD, moving averages)
+            - Support/resistance levels
+            - Volume analysis
+            Provide actionable trading signals."""
+        }
+    
+    def _create_risk_agent(self) -> dict:
+        return {
+            "name": "Risk Analyst",
+            "system_prompt": """You are a risk analyst specializing in:
+            - Market risk assessment
+            - Credit risk evaluation
+            - Operational risk identification
+            - Tail risk and stress testing
+            Quantify risks and suggest mitigations."""
+        }
+    
+    def _create_portfolio_manager(self) -> dict:
+        return {
+            "name": "Portfolio Manager",
+            "system_prompt": """You are a senior portfolio manager who synthesizes inputs from:
+            - Fundamental analysts
+            - Technical analysts
+            - Risk analysts
+            Make final investment decisions with position sizing recommendations."""
+        }
+    
+    def _invoke_agent(self, agent_key: str, context: str, query: str) -> str:
+        agent = self.agents[agent_key]
+        
+        response = self.client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[
+                {"role": "system", "content": agent["system_prompt"]},
+                {"role": "user", "content": f"Context:\n{context}\n\nQuery:\n{query}"}
+            ],
+            temperature=0.3
+        )
+        
+        return response.choices[0].message.content
+    
+    def analyze_investment(self, ticker: str, context: dict) -> dict:
+        """Run multi-agent analysis workflow"""
+        
+        context_str = json.dumps(context, indent=2)
+        
+        # Step 1: Fundamental analysis
+        fundamental_analysis = self._invoke_agent(
+            "fundamental_analyst",
+            context_str,
+            f"Provide comprehensive fundamental analysis for {ticker}"
+        )
+        
+        # Step 2: Technical analysis (parallel with fundamental)
+        technical_analysis = self._invoke_agent(
+            "technical_analyst",
+            context_str,
+            f"Provide technical analysis and trading signals for {ticker}"
+        )
+        
+        # Step 3: Risk analysis
+        risk_analysis = self._invoke_agent(
+            "risk_analyst",
+            f"Fundamental: {fundamental_analysis}\n\nTechnical: {technical_analysis}",
+            f"Assess key risks for investing in {ticker}"
+        )
+        
+        # Step 4: Portfolio manager synthesizes
+        combined_analysis = f"""
+        FUNDAMENTAL ANALYSIS:
+        {fundamental_analysis}
+        
+        TECHNICAL ANALYSIS:
+        {technical_analysis}
+        
+        RISK ANALYSIS:
+        {risk_analysis}
+        """
+        
+        final_recommendation = self._invoke_agent(
+            "portfolio_manager",
+            combined_analysis,
+            f"Synthesize all analyses and provide final recommendation for {ticker}"
+        )
+        
+        return {
+            "ticker": ticker,
+            "fundamental_analysis": fundamental_analysis,
+            "technical_analysis": technical_analysis,
+            "risk_analysis": risk_analysis,
+            "final_recommendation": final_recommendation
+        }
+```
+
+### Structured Output and JSON Mode for Financial Data
+
+```python
+from pydantic import BaseModel, Field
+from typing import Optional, Literal
+from enum import Enum
+
+class InvestmentRecommendation(str, Enum):
+    STRONG_BUY = "Strong Buy"
+    BUY = "Buy"
+    HOLD = "Hold"
+    SELL = "Sell"
+    STRONG_SELL = "Strong Sell"
+
+class ValuationMetrics(BaseModel):
+    pe_ratio: float = Field(description="Price to Earnings ratio")
+    pb_ratio: float = Field(description="Price to Book ratio")
+    ev_ebitda: float = Field(description="Enterprise Value to EBITDA")
+    dcf_fair_value: float = Field(description="DCF-based fair value per share")
+    upside_potential: float = Field(description="Percentage upside to fair value")
+
+class RiskAssessment(BaseModel):
+    overall_risk: Literal["Low", "Medium", "High", "Very High"]
+    market_risk: float = Field(ge=0, le=10, description="Market risk score 0-10")
+    company_risk: float = Field(ge=0, le=10, description="Company-specific risk score 0-10")
+    key_risks: List[str] = Field(description="List of key risk factors")
+
+class StructuredInvestmentAnalysis(BaseModel):
+    ticker: str
+    company_name: str
+    sector: str
+    recommendation: InvestmentRecommendation
+    target_price: float
+    current_price: float
+    confidence: float = Field(ge=0, le=1, description="Confidence level 0-1")
+    valuation: ValuationMetrics
+    risk_assessment: RiskAssessment
+    investment_thesis: str = Field(description="2-3 sentence investment thesis")
+    key_catalysts: List[str]
+    key_concerns: List[str]
+
+class StructuredOutputFinancialAnalyst:
+    """Financial analyst with structured JSON output"""
+    
+    def __init__(self, api_key: str):
+        self.client = OpenAI(api_key=api_key)
+        
+    def analyze(self, ticker: str, context: str) -> StructuredInvestmentAnalysis:
+        """Generate structured investment analysis"""
+        
+        response = self.client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[
+                {"role": "system", "content": """You are a financial analyst. 
+                Generate structured investment analysis in the exact JSON format specified.
+                Be precise with numbers and provide data-driven insights."""},
+                {"role": "user", "content": f"Analyze {ticker}:\n{context}"}
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.2
+        )
+        
+        result = json.loads(response.choices[0].message.content)
+        return StructuredInvestmentAnalysis(**result)
+```
+
+### Advanced Prompt Engineering for Finance
+
+```python
+class AdvancedFinancialPromptEngineer:
+    """Advanced prompt engineering techniques for financial analysis"""
+    
+    def __init__(self, api_key: str):
+        self.client = OpenAI(api_key=api_key)
+    
+    def chain_of_thought_analysis(self, ticker: str, data: dict) -> str:
+        """Use chain-of-thought prompting for complex analysis"""
+        
+        prompt = f"""
+        Analyze {ticker} step by step:
+        
+        Data provided:
+        {json.dumps(data, indent=2)}
+        
+        Let's think through this systematically:
+        
+        Step 1: Business Quality Analysis
+        - What is the company's competitive position?
+        - What are the sustainable competitive advantages?
+        - How strong is the management team?
+        
+        Step 2: Financial Analysis
+        - Analyze revenue trends and growth drivers
+        - Evaluate profitability metrics and trends
+        - Assess cash flow quality and capital allocation
+        - Review balance sheet strength
+        
+        Step 3: Valuation Assessment
+        - Compare current multiples to historical averages
+        - Compare to peer group valuations
+        - Estimate intrinsic value using DCF
+        
+        Step 4: Risk Evaluation
+        - Identify company-specific risks
+        - Assess macro and industry risks
+        - Evaluate risk/reward balance
+        
+        Step 5: Investment Conclusion
+        - Synthesize all factors
+        - Provide clear recommendation
+        - Specify entry points and position sizing
+        
+        Provide your analysis for each step, showing your reasoning.
+        """
+        
+        response = self.client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[
+                {"role": "system", "content": "You are a meticulous financial analyst who shows all reasoning."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3
+        )
+        
+        return response.choices[0].message.content
+    
+    def few_shot_earnings_analysis(self, earnings_data: dict) -> str:
+        """Few-shot prompting for earnings analysis"""
+        
+        examples = """
+        Example 1:
+        Input: AAPL Q4 2023 - Revenue $89.5B (est: $89.3B), EPS $1.46 (est: $1.39), iPhone revenue -1% YoY
+        Analysis: Solid quarter with revenue/EPS beats. iPhone weakness offset by Services growth (+16% YoY). 
+        Gross margin expansion to 45.2% shows pricing power. Slight concern on China weakness but manageable.
+        Outlook: Cautiously optimistic, in-line guide suggests conservative management. Rating: BUY
+        
+        Example 2:
+        Input: NVDA Q3 2024 - Revenue $18.1B (est: $16.1B), EPS $4.02 (est: $3.37), Data Center +279% YoY
+        Analysis: Blowout quarter driven by AI demand. Data center segment now 80% of revenue. 
+        Supply constraints easing. China export restrictions a headwind but manageable near-term.
+        Outlook: Beat-and-raise cycle continues. AI demand secular not cyclical. Rating: STRONG BUY
+        
+        Example 3:
+        Input: META Q4 2023 - Revenue $40.1B (est: $39.0B), EPS $5.33 (est: $4.96), Reality Labs loss $4.6B
+        Analysis: Strong ad revenue recovery, +25% YoY driven by Reels monetization and AI ad targeting.
+        Reality Labs losses remain elevated but company committing to efficiency. 
+        Outlook: "Year of Efficiency" delivering results. Multiple still reasonable. Rating: BUY
+        """
+        
+        prompt = f"""
+        Based on these examples of earnings analysis:
+        
+        {examples}
+        
+        Now analyze this earnings report:
+        Input: {json.dumps(earnings_data)}
+        
+        Provide a similar concise analysis with key metrics, insights, and rating.
+        """
+        
+        response = self.client.chat.completions.create(
+            model="gpt-4-turbo",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.3
+        )
+        
+        return response.choices[0].message.content
+    
+    def self_consistency_valuation(self, ticker: str, data: dict, n_samples: int = 5) -> dict:
+        """Use self-consistency sampling for robust valuation"""
+        
+        valuations = []
+        reasoning = []
+        
+        prompt = f"""
+        Estimate the fair value for {ticker} based on:
+        {json.dumps(data, indent=2)}
+        
+        Use your best judgment combining multiple valuation methods.
+        Provide a single fair value estimate and brief reasoning.
+        Format: Fair Value: $XXX | Reasoning: [brief explanation]
+        """
+        
+        for _ in range(n_samples):
+            response = self.client.chat.completions.create(
+                model="gpt-4-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a valuation expert. Provide precise estimates."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.7  # Higher temperature for diversity
+            )
+            
+            result = response.choices[0].message.content
+            reasoning.append(result)
+            
+            # Extract value (simplified parsing)
+            if "Fair Value: $" in result:
+                try:
+                    value_str = result.split("Fair Value: $")[1].split()[0].replace(",", "")
+                    valuations.append(float(value_str))
+                except:
+                    pass
+        
+        if valuations:
+            return {
+                "median_fair_value": np.median(valuations),
+                "mean_fair_value": np.mean(valuations),
+                "std_fair_value": np.std(valuations),
+                "min_fair_value": min(valuations),
+                "max_fair_value": max(valuations),
+                "n_samples": len(valuations),
+                "reasoning_samples": reasoning
+            }
+        
+        return {"error": "Could not extract valuations"}
+```
+
+### Fine-Tuning with LoRA for Financial LLMs
+
+```python
+class FinancialLoRAFineTuner:
+    """LoRA fine-tuning setup for financial domain LLMs"""
+    
+    def __init__(self, base_model: str = "meta-llama/Llama-2-7b-hf"):
+        self.base_model = base_model
+        
+    def get_lora_config(self) -> dict:
+        """LoRA configuration optimized for financial tasks"""
+        return {
+            "r": 16,  # Rank
+            "lora_alpha": 32,
+            "target_modules": ["q_proj", "v_proj", "k_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+            "lora_dropout": 0.05,
+            "bias": "none",
+            "task_type": "CAUSAL_LM"
+        }
+    
+    def prepare_financial_dataset(self, data: List[dict]) -> List[dict]:
+        """Prepare financial Q&A pairs for fine-tuning"""
+        formatted = []
+        
+        for item in data:
+            formatted.append({
+                "instruction": item["question"],
+                "input": item.get("context", ""),
+                "output": item["answer"]
+            })
+        
+        return formatted
+    
+    def get_training_config(self) -> dict:
+        """Training configuration for financial fine-tuning"""
+        return {
+            "output_dir": "./financial_lora",
+            "num_train_epochs": 3,
+            "per_device_train_batch_size": 4,
+            "gradient_accumulation_steps": 4,
+            "learning_rate": 2e-4,
+            "warmup_ratio": 0.03,
+            "lr_scheduler_type": "cosine",
+            "logging_steps": 10,
+            "save_strategy": "epoch",
+            "fp16": True,
+            "optim": "adamw_torch",
+            "max_grad_norm": 0.3,
+            "weight_decay": 0.001
+        }
+    
+    def create_financial_training_examples(self) -> List[dict]:
+        """Create domain-specific training examples"""
+        return [
+            {
+                "question": "What does a PE ratio of 35 indicate for a software company?",
+                "context": "The company is a fast-growing SaaS business with 40% revenue growth.",
+                "answer": """A PE of 35 for a fast-growing SaaS company (40% growth) is reasonable given the PEG ratio of 0.875 (35/40). 
+                High-growth software companies typically trade at 20-40x earnings due to high margins, recurring revenue, and scalability.
+                Compare to peers: sector median ~30x for similar growth profiles. The premium is justified if growth is sustainable."""
+            },
+            {
+                "question": "Analyze the working capital trend: AR +25%, Revenue +10%",
+                "answer": """Red flag: Accounts receivable growing 2.5x faster than revenue indicates potential issues:
+                1. Aggressive revenue recognition (channel stuffing)
+                2. Deteriorating customer creditworthiness  
+                3. Extended payment terms to drive sales
+                Calculate DSO trend and compare to industry. If DSO increased >20%, investigate further.
+                Check cash flow from operations vs. net income for confirmation."""
+            },
+            {
+                "question": "Calculate enterprise value for: Market Cap $50B, Debt $10B, Cash $5B",
+                "answer": """Enterprise Value = Market Cap + Total Debt - Cash
+                EV = $50B + $10B - $5B = $55B
+                
+                This represents the theoretical takeover price. Key considerations:
+                - Net debt position: $10B - $5B = $5B (manageable if EBITDA > $5B)
+                - EV/Sales and EV/EBITDA multiples more relevant than P/E for this company
+                - Cash could include restricted cash; verify in footnotes"""
+            }
+        ]
+```
+
 ## Key Takeaways
 
-- LLMs can significantly enhance financial analysis capabilities
-- Prompt engineering is crucial for quality financial insights
-- RAG systems combine retrieval with generation for better accuracy
-- Fine-tuning adapts LLMs to financial domain specifics
-- Always validate LLM outputs against actual data
-- Consider confidence scoring and uncertainty quantification
-- Maintain source attribution and transparency
+- Modern LLMs with tool-use enable real-time financial data analysis
+- Multi-agent architectures improve analysis quality through specialization
+- Structured outputs ensure consistent, parseable financial recommendations
+- Chain-of-thought prompting improves reasoning for complex analyses
+- Fine-tuning with LoRA adapts general LLMs to financial domain efficiently
+- Self-consistency sampling provides more robust estimates
+- Always validate LLM outputs against authoritative data sources
+- Consider hallucination risks especially for numerical data
 
 ## Next Steps
 
