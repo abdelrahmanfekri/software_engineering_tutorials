@@ -59,23 +59,31 @@ This is a comprehensive, production-ready tutorial series covering the applicati
 
 ### Prerequisites
 ```bash
-# Install required packages
-pip install numpy pandas matplotlib seaborn
-pip install scikit-learn torch transformers
-pip install yfinance pandas-ta ta-lib
-pip install openai langchain sentence-transformers
+pip install -r requirements.txt
 ```
+
+Or install manually:
+```bash
+pip install numpy pandas matplotlib seaborn scikit-learn yfinance
+pip install torch transformers  # for NLP modules
+pip install openai langchain sentence-transformers  # for LLM modules
+```
+
+Note: `pandas-ta` and `ta-lib` are optional; ta-lib may require system libraries.
 
 ### Run Your First Example
 ```python
-# Example: Financial Sentiment Analysis
-from finance_nlp import FinancialSentimentAnalyzer
+import yfinance as yf
+import pandas as pd
 
-analyzer = FinancialSentimentAnalyzer()
-text = "Apple beats earnings estimates with strong iPhone sales"
-result = analyzer.analyze_sentiment(text)
-print(f"Sentiment: {result['sentiment']}, Score: {result['combined_score']:.3f}")
+ticker = yf.Ticker("AAPL")
+df = ticker.history(period="1y")
+returns = df["Close"].pct_change().dropna()
+print(f"AAPL 1Y Return: {returns.mean()*252*100:.2f}% ann.")
+print(f"Volatility: {returns.std()*(252**0.5)*100:.2f}% ann.")
 ```
+
+For sentiment analysis and LLM examples, see [Module 2](02-financial-text-analytics-nlp.md) and [Module 14](14-llm-powered-financial-analysis.md).
 
 ## 📖 Learning Paths
 
@@ -165,38 +173,29 @@ print(f"Sentiment: {result['sentiment']}, Score: {result['combined_score']:.3f}"
 
 ## 📊 Example Projects
 
-### 1. Autonomous Trading Agent
-```python
-from finance_agents import AutonomousTradingAgent
+Full implementations live in the modules. Conceptual patterns:
 
-agent = AutonomousTradingAgent(
-    name="AlphaBot",
-    initial_capital=100000,
-    universe=['AAPL', 'MSFT', 'GOOGL']
+### 1. Autonomous Trading Agent (Module 13)
+```python
+# See 13-financial-ai-agents-automation.md for full implementation
+# Pattern: gym-based env + RL agent with risk controls
+```
+
+### 2. LLM Financial Research (Module 14)
+```python
+from openai import OpenAI
+client = OpenAI(api_key="your-key")
+response = client.chat.completions.create(
+    model="gpt-4",
+    messages=[{"role": "user", "content": "Summarize investment thesis for TSLA"}]
 )
-
-agent.run_trading_cycle()
-print(f"Portfolio Value: ${agent.portfolio_value:,.2f}")
-print(f"P&L: {agent.total_pnl_pct:.2f}%")
+print(response.choices[0].message.content)
 ```
 
-### 2. LLM Financial Research
+### 3. Financial Sentiment (Module 2)
 ```python
-from finance_llm import FinancialLLMSystem
-
-llm = FinancialLLMSystem(api_key="your-key")
-thesis = llm.generate_investment_thesis("TSLA")
-print(thesis['thesis'])
-```
-
-### 3. Multi-Agent Trading System
-```python
-from finance_agents import MultiAgentTradingSystem
-
-mas = MultiAgentTradingSystem()
-mas.register_agent(momentum_agent)
-mas.register_agent(value_agent)
-mas.run_coordinated_cycle()
+# See 02-financial-text-analytics-nlp.md - FinancialSentimentAnalyzer
+# Uses ProsusAI/finbert via transformers
 ```
 
 ## 🎓 Certification

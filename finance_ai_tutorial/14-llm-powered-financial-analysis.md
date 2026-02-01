@@ -25,7 +25,7 @@ Large Language Models have revolutionized financial analysis by enabling natural
 ## Financial LLM System Architecture
 
 ```python
-import openai
+from openai import OpenAI
 from typing import List, Dict, Optional
 import numpy as np
 from dataclasses import dataclass
@@ -72,7 +72,7 @@ class FinancialLLMSystem:
             api_key: OpenAI API key
             model: Model to use (gpt-4, gpt-3.5-turbo, etc.)
         """
-        openai.api_key = api_key
+        self.client = OpenAI(api_key=api_key)
         self.model = model
         self.conversation_history = []
         self.knowledge_base = {}
@@ -235,7 +235,7 @@ class FinancialLLMSystem:
     def _query_llm(self, prompt: str, temperature: float = 0.3) -> str:
         """Query the LLM with a prompt"""
         try:
-            response = openai.ChatCompletion.create(
+            response = self.client.chat.completions.create(
                 model=self.model,
                 messages=[
                     {"role": "system", "content": "You are an expert financial analyst with deep knowledge of markets, companies, and investment strategies."},

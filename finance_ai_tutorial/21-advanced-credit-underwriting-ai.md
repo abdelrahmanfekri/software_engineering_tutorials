@@ -16,7 +16,7 @@
 Recent research (McKinsey 2026) shows that 60% of major banks expect to implement generative AI in credit underwriting within a year. This section implements state-of-the-art LLM applications.
 
 ```python
-import openai
+from openai import OpenAI
 from typing import Dict, List, Optional
 import pandas as pd
 import numpy as np
@@ -42,7 +42,7 @@ class GenerativeUnderwritingSystem:
     
     def __init__(self, model: str = "gpt-4", api_key: str = None):
         self.model = model
-        openai.api_key = api_key
+        self.client = OpenAI(api_key=api_key)
         self.decision_history = []
         
     def generate_credit_memo(
@@ -88,7 +88,7 @@ class GenerativeUnderwritingSystem:
             """}
         ]
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             temperature=0.2,
@@ -146,7 +146,7 @@ class GenerativeUnderwritingSystem:
         - required_conditions: list of strings
         """
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are a data extraction specialist. Return only valid JSON."},
@@ -187,7 +187,7 @@ class GenerativeUnderwritingSystem:
         - Recommended action
         """
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are a lending compliance expert."},
@@ -232,7 +232,7 @@ class GenerativeUnderwritingSystem:
         - Contact information for questions
         """
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are a customer communications specialist in banking."},
@@ -254,8 +254,9 @@ class ChainOfThoughtUnderwriter:
     Research basis: Wei et al. (2022) - Chain-of-Thought Prompting
     """
     
-    def __init__(self, model: str = "gpt-4"):
+    def __init__(self, model: str = "gpt-4", api_key: str = None):
         self.model = model
+        self.client = OpenAI(api_key=api_key)
         
     def analyze_with_reasoning(
         self,
@@ -284,7 +285,7 @@ class ChainOfThoughtUnderwriter:
         Walk through each step with calculations and reasoning, then provide final decision.
         """
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are an expert underwriter. Show your reasoning at each step."},
@@ -330,8 +331,9 @@ class ToolUseUnderwriter:
     Research basis: Schick et al. (2023) - Toolformer
     """
     
-    def __init__(self, model: str = "gpt-4-turbo"):
+    def __init__(self, model: str = "gpt-4-turbo", api_key: str = None):
         self.model = model
+        self.client = OpenAI(api_key=api_key)
         self.tools = self._define_tools()
         
     def _define_tools(self) -> List[Dict]:
@@ -398,7 +400,7 @@ class ToolUseUnderwriter:
             {"role": "user", "content": f"Underwrite this application: {application.__dict__}"}
         ]
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             tools=self.tools,
@@ -419,7 +421,7 @@ class ToolUseUnderwriter:
                     "content": json.dumps(result)
                 })
             
-            final_response = openai.ChatCompletion.create(
+            final_response = self.client.chat.completions.create(
                 model=self.model,
                 messages=messages
             )

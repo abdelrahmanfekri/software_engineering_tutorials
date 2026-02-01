@@ -20,7 +20,7 @@ This module mirrors the depth and structure of Module 21 (Advanced Credit Underw
 Research basis: McKinsey (2026) Gen AI in Credit Risk; Shariah Governance Standard on Generative AI for Islamic Financial Institutions (2025). LLMs are used to generate financing memos that explicitly reference financing structure (Murabaha, Musharakah, etc.), asset-backing, and Shariah considerations—not interest-based logic.
 
 ```python
-import openai
+from openai import OpenAI
 from typing import Dict, List, Optional, Any
 import pandas as pd
 import numpy as np
@@ -51,7 +51,7 @@ class GenerativeIslamicUnderwritingSystem:
     
     def __init__(self, model: str = "gpt-4", api_key: str = None):
         self.model = model
-        openai.api_key = api_key
+        self.client = OpenAI(api_key=api_key)
         self.decision_history = []
         
     def generate_shariah_credit_memo(
@@ -100,7 +100,7 @@ class GenerativeIslamicUnderwritingSystem:
             """}
         ]
         
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             temperature=0.2,
@@ -150,7 +150,7 @@ class GenerativeIslamicUnderwritingSystem:
         Return JSON: recommendation (approve|decline|refer), confidence_score (0-100),
         key_risk_factors (list), mitigating_factors (list), shariah_conditions (list).
         """
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are a data extraction specialist. Return only valid JSON."},
@@ -170,8 +170,9 @@ class ChainOfThoughtIslamicUnderwriter:
     Research basis: Wei et al. (2022) Chain-of-Thought Prompting.
     """
     
-    def __init__(self, model: str = "gpt-4"):
+    def __init__(self, model: str = "gpt-4", api_key: str = None):
         self.model = model
+        self.client = OpenAI(api_key=api_key)
         
     def analyze_with_reasoning(self, application: IslamicFinancingApplication) -> Dict[str, Any]:
         """
@@ -190,7 +191,7 @@ class ChainOfThoughtIslamicUnderwriter:
         Step 4: Compensating factors.
         Step 5: Final recommendation (Approve / Decline / Refer) and brief reason.
         """
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are an expert in partnership-based, asset-backed financing. Show reasoning; do not use interest."},
@@ -213,8 +214,9 @@ class ToolUseIslamicUnderwriter:
     Research basis: Schick et al. (2023) Toolformer.
     """
     
-    def __init__(self, model: str = "gpt-4-turbo"):
+    def __init__(self, model: str = "gpt-4-turbo", api_key: str = None):
         self.model = model
+        self.client = OpenAI(api_key=api_key)
         self.tools = self._define_tools()
         
     def _define_tools(self) -> List[Dict]:
@@ -253,7 +255,7 @@ class ToolUseIslamicUnderwriter:
             {"role": "system", "content": "You are an underwriter for partnership-based, asset-backed financing. Use tools to verify Shariah and compute prices/ratios; never use interest."},
             {"role": "user", "content": json.dumps({k: str(v) for k, v in application.__dict__.items()})}
         ]
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=messages,
             tools=self.tools,
@@ -265,7 +267,7 @@ class ToolUseIslamicUnderwriter:
             messages.append(message)
             for tc, res in zip(message.tool_calls, tool_results):
                 messages.append({"role": "tool", "tool_call_id": tc.id, "content": json.dumps(res)})
-            final = openai.ChatCompletion.create(model=self.model, messages=messages)
+            final = self.client.chat.completions.create(model=self.model, messages=messages)
             return {'decision': final.choices[0].message.content, 'tools_used': [t.function.name for t in message.tool_calls], 'verification_results': tool_results}
         return {'decision': message.content, 'tools_used': [], 'verification_results': []}
     
@@ -784,8 +786,9 @@ class ShariahAIOracle:
     Research basis: Shariah Governance Standard on Gen AI (2025).
     """
     
-    def __init__(self, model: str = "gpt-4"):
+    def __init__(self, model: str = "gpt-4", api_key: str = None):
         self.model = model
+        self.client = OpenAI(api_key=api_key)
         
     async def analyze_contract_shariah(self, contract_text: str, contract_type: str) -> Dict[str, Any]:
         prompt = f"""
@@ -795,7 +798,7 @@ class ShariahAIOracle:
         Contract:
         {contract_text}
         """
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=[
                 {"role": "system", "content": "You are a Shariah analysis assistant. You do not issue binding fatwas."},
