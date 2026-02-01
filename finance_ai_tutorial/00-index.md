@@ -2,19 +2,45 @@
 
 ## Overview
 
-This comprehensive PhD-level tutorial covers cutting-edge applications of Artificial Intelligence, Natural Language Processing, and Agentic AI systems to financial analysis, trading, risk management, and regulatory compliance. Designed for researchers, quantitative analysts, and practitioners seeking mastery of state-of-the-art techniques in computational finance.
+This comprehensive PhD-level tutorial covers cutting-edge applications of Artificial Intelligence, Natural Language Processing, and Agentic AI systems to financial analysis, trading, risk management, **advanced underwriting**, **Islamic finance**, and regulatory compliance. Designed for researchers, quantitative analysts, practitioners, and **fintech entrepreneurs** seeking mastery of state-of-the-art techniques in computational finance and building world-class financial AI systems.
+
+**🆕 NEW: Advanced Underwriting & Islamic Finance Track (Modules 21-26)**
+- Complete guide to building an AI underwriting startup
+- PhD-level coverage of credit and insurance underwriting
+- First-ever comprehensive Islamic finance AI curriculum
+- Production system architecture and go-to-market strategy
+- Path from research to $100M ARR fintech company
 
 ## Research Focus Areas
 
 This tutorial emphasizes emerging research directions including:
+
+**Core AI Techniques:**
 - **State Space Models (Mamba)** for efficient sequence modeling
-- **Foundation Models** for financial time series
+- **Foundation Models** for financial time series and underwriting
 - **Neural Controlled Differential Equations** for continuous-time modeling
-- **Graph Neural Networks** for systemic risk and corporate networks
+- **Graph Neural Networks** for systemic risk, corporate networks, and credit assessment
 - **Diffusion Models** for synthetic financial data generation
 - **Federated Learning** for privacy-preserving collaborative AI
 - **Decision Transformers** for offline reinforcement learning
 - **Agentic AI Systems** with tool-use and multi-agent orchestration
+
+**Advanced Underwriting (NEW):** 🆕
+- **Generative AI for Underwriting** (LLM-based credit memos, automated decision generation)
+- **Alternative Data Integration** (cash flow, telco, rental, open banking APIs)
+- **Graph Neural Networks** for credit networks and SME risk assessment
+- **Explainable AI** for regulatory compliance (SHAP, LIME, counterfactuals, adverse action)
+- **Causal Inference** in credit risk (treatment effects, counterfactual policy analysis)
+- **Computer Vision** for property and insurance underwriting (satellite, drone imagery)
+- **Telematics & IoT** for usage-based insurance and dynamic pricing
+
+**Islamic Finance AI (NEW):** 🕌 🆕
+- **Shariah Governance Frameworks** for AI systems (dual governance, SSB + AI Ethics)
+- **Riba-Free Credit Models** (profit-loss sharing, Mudarabah, Musharakah pricing)
+- **Gharar Minimization** through explainable AI and transparency
+- **Automated Shariah Screening** (AAOIFI standards, halal investment)
+- **Islamic Takaful Underwriting** (cooperative insurance, surplus sharing)
+- **Maqasid al-Shariah Alignment** (five objectives framework for ethical AI)
 
 ## Table of Contents
 
@@ -194,6 +220,81 @@ This tutorial emphasizes emerging research directions including:
     - Secure aggregation and differential privacy
     - Industry case studies and production implementations
 
+### Part VI: Advanced Underwriting and Islamic Finance (Modules 21-27) 🆕
+
+21. **[Advanced Credit Underwriting with AI](21-advanced-credit-underwriting-ai.md)** ✨
+
+    - **Generative AI for Underwriting** (LLM-based credit memos, tool-use)
+    - **Alternative Data Integration** (cash flow underwriting, FinRegLab 2025 research)
+    - **Graph Neural Networks** for credit assessment (SME networks, relationship modeling)
+    - **Explainable AI** for regulatory compliance (SHAP, LIME, counterfactuals)
+    - **Hybrid Neural-Symbolic** underwriting (rules + ML)
+    - **Causal Inference** in credit risk (treatment effects, do-calculus)
+    - Federated learning for privacy-preserving underwriting
+    - Neural ODEs for continuous-time credit risk
+
+22. **[AI for Insurance Underwriting](22-insurance-underwriting-ai.md)** ✨
+
+    - **Computer Vision** for property assessment (satellite + drone imagery)
+    - **Telematics and IoT Data** (usage-based insurance, driving behavior)
+    - **NLP for Medical Records** (clinical BERT, mortality modeling)
+    - **Mortality and Longevity Modeling** (Lee-Carter + ML enhancement)
+    - **Climate Risk Integration** (flood, wildfire, hurricane modeling)
+    - **Fraud Detection** in claims (network analysis, image forensics)
+    - **Real-Time Dynamic Pricing** (personalized risk-based pricing)
+
+23. **[Islamic Finance and AI](23-islamic-finance-ai.md)** 🕌 ✨
+
+    - **Fundamentals of Islamic Finance** (Riba, Gharar, Maysir prohibitions)
+    - **Shariah Governance for AI** (dual governance framework, SSB + AI Ethics)
+    - **Riba-Free Credit Risk Models** (profit-loss sharing, Mudarabah, Musharakah)
+    - **Gharar Minimization** in ML systems (explainability requirements)
+    - **Halal Investment Screening** (AAOIFI standards, automated screening)
+    - **Islamic Takaful Underwriting** (cooperative insurance, surplus sharing)
+    - **Maqasid al-Shariah Alignment** (five objectives framework)
+    - Production Islamic fintech systems
+
+24. **[Building an AI Underwriting Startup - Part I: Technical Architecture](24-underwriting-startup-architecture.md)** 🚀
+
+    - **Modern Tech Stack** (FastAPI, Kafka, Kubernetes, MLflow, Feast)
+    - **Microservices Architecture** (10+ specialized services)
+    - **Real-Time Data Pipelines** (streaming, event-driven architecture)
+    - **ML Model Deployment** (registry, A/B testing, shadow mode)
+    - **API Design** and integration patterns
+    - **Scalability** and performance optimization
+    - **Security and Compliance** (encryption, audit trails)
+
+25. **[Building an AI Underwriting Startup - Part II: Go-To-Market](25-underwriting-startup-gtm.md)** 🚀
+
+    - **Product-Market Fit** (SME lending, Islamic finance, embedded finance)
+    - **Regulatory Strategy** (multi-jurisdiction compliance roadmap)
+    - **Partnership Models** (data, distribution, technology, Islamic finance)
+    - **Pricing and Unit Economics** (per-decision, SaaS, revenue share)
+    - **Sales and Distribution** (B2B enterprise, PLG, channel partnerships)
+    - **Customer Success** (onboarding, health scoring, optimization)
+    - Key metrics for $100M ARR
+
+26. **[Advanced Research Frontiers and Future Directions](26-research-frontiers.md)** 🔬 ✨
+
+    - **Foundation Models** for financial underwriting (zero-shot, few-shot)
+    - **Multimodal Underwriting** (text + images + structured + time-series)
+    - **Quantum Computing** applications (QAOA for portfolio optimization)
+    - **Advanced Islamic Finance AI** (Shariah AI oracle, blockchain governance)
+    - **Emerging Regulatory Landscape** (EU AI Act, fair lending AI)
+    - **Research Roadmap** (causal underwriting, Shariah formalization)
+    - **Building World-Class Team** (hiring strategy, team costs)
+
+27. **[Advanced Islamic Finance with AI](27-advanced-islamic-finance-ai.md)** 🕌 ✨
+
+    - **Generative AI for Islamic Underwriting** (LLM Shariah memos, chain-of-thought, tool-use: Shariah check, Murabaha price, profit-sharing ratio)
+    - **Alternative Data Integration for Islamic Finance** (halal-only cash flow, Shariah-aware data provenance)
+    - **Graph Neural Networks for Islamic Credit** (borrower-asset-guarantor graphs, Shariah compliance propagation)
+    - **Explainable AI in Islamic Underwriting** (Gharar minimization, SSB-ready explanations, Shariah-compliant adverse action)
+    - **Hybrid Neural-Symbolic Islamic Underwriting** (AAOIFI-style RuleEngine, Shariah hard constraints + ML)
+    - **Causal Inference in Islamic Finance** (causal DAG for financing mode vs. default/profit; treatment effects)
+    - **Research Frontiers** (Shariah AI oracle, federated learning for Islamic banks, formal verification of Shariah compliance)
+    - Production Islamic underwriting platform (same maturity as Module 21)
+
 ## Learning Paths
 
 ### Quantitative Analyst Path (Modules 1-5, 7-8, 12)
@@ -221,7 +322,7 @@ For systematic trading:
 7. Backtesting
 8. Production systems
 
-### AI Research Path (Modules 2, 4-7, 10, 13-16)
+### AI Research Path (Modules 2, 4-7, 10, 13-16, 26)
 
 For AI/ML researchers in finance:
 
@@ -233,6 +334,7 @@ For AI/ML researchers in finance:
 6. RL for trading
 7. Agentic AI systems
 8. LLM applications
+9. **Research frontiers** 🆕
 
 ### Risk Manager Path (Modules 1, 3-4, 8, 18-19)
 
@@ -255,6 +357,59 @@ For analysts and portfolio managers:
 4. Financial AI agents
 5. LLM-powered analysis
 6. Investment research automation
+
+### Credit Underwriting Specialist Path (Modules 1-4, 8, 21, 24-26) 🆕
+
+For credit underwriting and lending professionals:
+
+1. Financial fundamentals
+2. Machine learning basics
+3. Risk management with AI
+4. **Advanced credit underwriting** (Gen AI, alternative data, GNNs)
+5. **Technical architecture** (production systems)
+6. **Go-to-market strategy**
+7. **Research frontiers**
+
+### Islamic Finance AI Specialist Path (Modules 1-4, 21, 23, 27, 24-26) 🆕 🕌
+
+For Islamic finance and Shariah-compliant fintech:
+
+1. Financial fundamentals
+2. Machine learning basics
+3. **Advanced underwriting** (Module 21: alternative data, explainability, GNN)
+4. **Islamic finance and AI** (Module 23: Shariah compliance, riba-free models, Takaful)
+5. **Advanced Islamic finance with AI** (Module 27: Gen AI Shariah memos, halal cash flow, GNN Islamic credit, XAI/Gharar, hybrid rules, causal inference—same maturity as Module 21)
+6. **Technical architecture** (microservices, compliance systems)
+7. **Go-to-market** (Islamic finance / values-based market strategy)
+8. **Research frontiers** (Shariah AI oracle, quantum computing)
+
+### Insurance Underwriting Path (Modules 1-4, 8, 22, 24-26) 🆕
+
+For insurance underwriting professionals:
+
+1. Financial fundamentals
+2. Machine learning basics
+3. Risk management with AI
+4. **Insurance underwriting AI** (computer vision, telematics, medical NLP)
+5. **Technical architecture**
+6. **Go-to-market**
+7. **Research frontiers**
+
+### Fintech Entrepreneur Path (Modules 1-4, 8, 13-14, 21-27) 🆕 🚀
+
+For building an AI underwriting startup:
+
+1. Financial fundamentals
+2. Machine learning basics
+3. Risk management
+4. Agentic AI systems
+5. LLM-powered analysis
+6. **Advanced credit underwriting** (Module 21)
+7. **Insurance underwriting AI** (Module 22, optional)
+8. **Islamic finance AI** (Module 23: fundamentals) + **Advanced Islamic finance with AI** (Module 27: same maturity as Module 21, for values-based / partnership-based product)
+9. **Technical architecture** (Module 24: building production systems)
+10. **Go-to-market strategy** (Module 25: fundraising, sales, partnerships)
+11. **Research frontiers** (Module 26: competitive advantage)
 
 ## Prerequisites
 
@@ -500,23 +655,79 @@ print(f"Transformers: {transformers.__version__}")
 
 ## Final Notes
 
-This tutorial provides a comprehensive professional-level journey from financial fundamentals to cutting-edge AI applications in finance. The field is rapidly evolving, so:
+This tutorial provides a comprehensive PhD-level journey from financial fundamentals to cutting-edge AI applications in finance, **advanced underwriting systems**, **Islamic finance**, and **building world-class fintech startups**. The field is rapidly evolving, so:
 
 -  **Stay Current**: Follow latest research and industry practices
--  **Practice Rigorously**: Backtest extensively before live trading
--  **Manage Risk**: Always prioritize risk management
--  **Follow Regulations**: Comply with all applicable laws
--  **Ethical Practice**: Consider broader market impact
--  **Continuous Learning**: Markets and technology evolve constantly
+-  **Practice Rigorously**: Backtest extensively before live trading/deployment
+-  **Manage Risk**: Always prioritize risk management and compliance
+-  **Follow Regulations**: Comply with all applicable laws (ECOA, FCRA, GDPR, AI Act, Shariah standards)
+-  **Ethical Practice**: Consider broader market impact and social welfare (including Maqasid al-Shariah)
+-  **Continuous Learning**: Markets, technology, and regulations evolve constantly
 
 ### Key Principles for Success
 
-1. **Theory + Practice**: Combine financial theory with ML expertise
-2. **Data First**: Quality data is crucial
-3. **Risk Management**: Never skip risk controls
-4. **Iterative Development**: Build incrementally
-5. **Validation**: Robust testing is essential
-6. **Production Ready**: Think about deployment from day one
-7. **Ethical AI**: Consider fairness and transparency
+1. **Theory + Practice**: Combine financial theory with ML expertise and domain knowledge
+2. **Data First**: Quality data is crucial - invest in alternative data and enrichment
+3. **Risk Management**: Never skip risk controls or regulatory compliance
+4. **Iterative Development**: Build incrementally, test rigorously
+5. **Validation**: Robust testing is essential (backtesting, A/B testing, fairness audits)
+6. **Production Ready**: Think about deployment, scalability, and monitoring from day one
+7. **Ethical AI**: Consider fairness, transparency, and social impact
+8. **Shariah Compliance** (for Islamic finance): Embed ex-ante, not ex-post verification
+9. **Customer Success**: Build systems that deliver real value to end-users
+10. **World-Class Team**: Hire the best technical talent and domain experts
 
-**Welcome to the frontier of AI in Finance! 📈🤖**
+### What You Can Build After This Tutorial
+
+**Traditional Finance:**
+- Algorithmic trading systems
+- Portfolio management platforms
+- Risk analytics engines
+- Market surveillance systems
+
+**Advanced Underwriting (NEW):** 🆕
+- AI-powered credit underwriting platform
+- Insurance underwriting automation
+- Real-time decision APIs
+- Alternative data integration systems
+- Explainable AI compliance tools
+
+**Islamic Finance (NEW):** 🕌 🆕
+- Shariah-compliant underwriting systems
+- Automated halal investment screening
+- Islamic Takaful platforms
+- Mudarabah/Musharakah pricing engines
+- Gharar minimization tools
+
+**Startups You Can Launch:** 🚀
+- B2B underwriting API for lenders
+- Embedded finance infrastructure
+- Islamic fintech platform
+- InsurTech with AI underwriting
+- Credit-as-a-service for e-commerce
+- SME lending platform with alternative data
+
+### Path to $100M ARR Underwriting Startup
+
+This tutorial (especially Modules 21-26) provides everything you need:
+
+1. **Technical Foundation** (Modules 21-22, 24): Build production ML systems
+2. **Domain Expertise** (Modules 21-23): Master credit, insurance, Islamic finance
+3. **Regulatory Knowledge** (Modules 21, 23, 25): Navigate compliance landscape
+4. **Business Strategy** (Modules 25-26): Go-to-market, pricing, partnerships
+5. **Team Building** (Module 26): Hire world-class talent
+6. **Research Edge** (Module 26): Stay ahead with cutting-edge techniques
+
+**Timeline**: 5 years from launch to $100M ARR with focused execution.
+
+### Global Impact
+
+By completing this tutorial, you can:
+- **Democratize access to credit** through AI-powered underwriting
+- **Serve underserved markets** (SMEs, emerging economies, Islamic finance)
+- **Advance Islamic fintech** with Shariah-compliant AI systems
+- **Improve financial inclusion** with alternative data and explainable AI
+- **Build ethical AI** that aligns with Maqasid al-Shariah and fair lending principles
+- **Create world-class fintech** that scales globally
+
+**Welcome to the frontier of AI in Finance and Underwriting! 📈🤖🕌🚀**
