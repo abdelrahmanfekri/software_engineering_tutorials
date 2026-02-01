@@ -708,10 +708,12 @@ This comprehensive tutorial has equipped you with:
    - ML deployment
 
 5. **Go-To-Market** (Module 25)
-   - Product-market fit
-   - Regulatory strategy
-   - Partnerships
-   - Pricing and economics
+   - Product-market fit and current competitors (NymCard, Agel, Halan, Lean+Synapse, Qarar, Abwab.ai, Orbii)
+   - Regulatory strategy, partnerships, pricing and economics
+   - Post-MVP: advisors, investors, bank partners (accelerators, Egypt banks, people to reach)
+   - When to raise and what to offer (bootstrap to first bank; equity 12–25%)
+   - Plan to $100M valuation (5–8 years)
+   - Beyond the tutorials: execution playbooks, legal/incorporation, sales/BD in practice, regulatory in practice, hiring & team, founder/fundraising reality, feedback loop
 
 6. **Research Frontiers** (Module 26)
    - Foundation models

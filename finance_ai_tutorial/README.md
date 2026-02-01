@@ -2,12 +2,12 @@
 
 ## 🎯 Overview
 
-This is a comprehensive, production-ready tutorial series covering the application of Artificial Intelligence, Natural Language Processing, Large Language Models, and Agentic AI to financial markets, trading, risk management, and investment analysis.
+This is a comprehensive, production-ready tutorial series covering the application of Artificial Intelligence, Natural Language Processing, Large Language Models, and Agentic AI to financial markets, trading, risk management, **advanced underwriting**, **Islamic finance**, and investment analysis.
 
 ## 📚 What's Included
 
 ### Complete Tutorial Coverage
-- **20 Comprehensive Modules** from fundamentals to advanced topics
+- **27 Comprehensive Modules** from fundamentals to advanced topics and underwriting/startup
 - **Production-Ready Code** with real-world implementations
 - **Hands-on Examples** using actual market data
 - **Best Practices** for financial AI systems
@@ -45,6 +45,15 @@ This is a comprehensive, production-ready tutorial series covering the applicati
 - Risk controls and compliance
 - Model governance and validation
 - Advanced topics and case studies
+
+#### Advanced Underwriting & Islamic Finance (21-27) 🆕
+- **Advanced credit underwriting AI** (Gen AI, alternative data, GNNs, explainability, causal inference)
+- **Insurance underwriting AI** (computer vision, telematics, medical NLP, climate risk, fraud)
+- **Islamic finance and AI** (Shariah governance, riba-free models, Takaful, Maqasid)
+- **Underwriting startup – technical architecture** (microservices, ML deployment, API, security)
+- **Underwriting startup – go-to-market** (product-market fit, competitors, regulatory, pricing, sales; post-MVP advisors/investors/banks; when to raise; plan to $100M valuation 5–8 years)
+- **Research frontiers** (foundation models, quantum, regulatory, team building)
+- **Advanced Islamic finance AI** (Gen AI Shariah memos, halal data, GNN Islamic credit, XAI/Gharar, hybrid rules, causal inference; same maturity as Module 21)
 
 ## 🚀 Quick Start
 
@@ -93,6 +102,13 @@ print(f"Sentiment: {result['sentiment']}, Score: {result['combined_score']:.3f}"
 - Understanding AI capabilities
 - Practical applications
 - AI-powered research tools
+
+### For Fintech Entrepreneurs (Underwriting / Islamic Finance) 🆕
+**Recommended:** Modules 1-4, 8, 13-14, 21-27 (see [00-index.md](00-index.md) for full path)
+- Advanced credit and insurance underwriting AI
+- Islamic finance AI (Shariah compliance, riba-free models)
+- Technical architecture and go-to-market (competitors, when to raise, plan to $100M valuation)
+- Research frontiers and team building
 
 ## 💡 Key Features
 
@@ -190,7 +206,8 @@ Upon completing modules, you can earn:
 - **Quantitative Analyst Certificate**: Modules 1-8
 - **Algorithmic Trader Certificate**: Modules 1-5, 9-12, 17
 - **AI for Finance Specialist**: Modules 2, 4-7, 10, 13-16
-- **Finance AI Expert**: All Modules
+- **Finance AI Expert**: All 27 Modules
+- **Fintech Entrepreneur (Underwriting)**: Modules 1-4, 8, 13-14, 21-27 (see [00-index.md](00-index.md))
 
 ## 📝 Best Practices
 
@@ -289,9 +306,9 @@ Educational use encouraged. For commercial use, ensure compliance with all appli
 
 ---
 
-**Ready to revolutionize financial analysis with AI?** Start with Module 1 or jump to your chosen learning path!
+**Ready to revolutionize financial analysis with AI?** Start with [00-index.md](00-index.md) to choose your path: quantitative analyst, algorithmic trader, risk manager, **fintech entrepreneur (underwriting / Islamic finance)**, or finance AI expert.
 
-**Questions?** The future of finance is AI-powered, and this tutorial series is your comprehensive guide.
+**Questions?** The future of finance is AI-powered, and this tutorial series (27 modules) is your comprehensive guide.
 
-🚀 **Let's build the future of finance together!** 📈🤖
+🚀 **Let's build the future of finance together!** 📈🤖🕌
 

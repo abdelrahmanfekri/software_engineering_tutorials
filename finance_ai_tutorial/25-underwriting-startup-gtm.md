@@ -1,7 +1,8 @@
 # Module 25: Building an AI Underwriting Startup - Part II: Go-To-Market
 
 ## Table of Contents
-1. [Product-Market Fit for Underwriting](#product-market-fit)
+1. [Product-Market Fit for Underwriting](#product-market-fit)  
+   - [Current Competitors in the Market](#current-competitors-in-the-market)
 2. [Regulatory Strategy](#regulatory-strategy)
 3. [Partnership Models](#partnership-models)
 4. [Pricing and Unit Economics](#pricing-and-unit-economics)
@@ -11,6 +12,7 @@
    - [People You Can Reach (Names and Roles)](#people-you-can-reach-names-and-roles)  
    - [When to Raise and What to Offer](#when-to-raise-and-what-to-offer)  
    - [Plan to $100M Valuation (5–8 Years)](#plan-to-100m-valuation-58-years)
+8. [Beyond the Tutorials: What You Still Need](#beyond-the-tutorials-what-you-still-need)
 
 ## Product-Market Fit
 
@@ -51,6 +53,30 @@ class UnderwritingStartupValueProps:
         'flexible': 'Customizable rules + ML models'
     }
 ```
+
+### Current Competitors in the Market
+
+**Egypt / MENA — Credit decisioning and underwriting**
+
+| Competitor | What they do | Geography | Your differentiation |
+|------------|---------------|------------|----------------------|
+| **NymCard** | No-code credit decision engine: drag-and-drop policies, credit bureaus, AI node, BNPL/cards/loans. CBE-regulated in Egypt. | Egypt, MENA | NymCard is card/loan infrastructure; you focus on **partnership-based / Islamic underwriting** (Murabaha, Shariah governance, SME-first) as a dedicated layer. |
+| **Agel** | Egypt’s first Islamic fintech. Murabaha trade finance for MSMEs; merchant–supplier platform; Banque Misr partnership; ADIB co-branded card planned. | Egypt | Agel is **lender + platform** (they originate); you are **B2B underwriting API** for banks. Banks use you to underwrite; Agel competes for SME borrowers. Partner or white-label possible. |
+| **MNT-Halan** | Egypt’s largest fintech lender (microfinance, SME, BNPL, payments). Lending as a Service 5K–15M EGP. 7M+ customers, $2.5B+ disbursed. | Egypt, expanding (e.g. Turkey) | Halan is **direct lender**; you are **underwriting engine for banks**. Banks use you to automate decisions; Halan is a distribution/competitor for end borrowers. |
+| **Lean + Synapse** | Lean (open banking) + Synapse (AI credit decisioning). Real-time data, cashflow underwriting, ML models. | Saudi, UAE, GCC | Similar to you on “AI decisioning”; you differentiate on **Islamic / values-based underwriting**, Shariah governance, and Egypt-first then MENA. |
+| **Qarar** | API-first credit solutions (SIMAH-backed). Affordability, BNPL, ECL. 65+ clients in GCC/MENA. | GCC, MENA | Qarar is broad credit/affordability; you focus on **Islamic SME underwriting** and **partnership-based** product design. |
+| **Abwab.ai** | Saudi AI SME credit decisioning: origination, underwriting, lead qualification. Targets MENA financing gap. | Saudi, MENA | Same segment (SME underwriting); you differentiate on **Shariah-compliant / values-based** positioning and Egypt beachhead. |
+| **Orbii** | B2B lending intelligence: automated underwriting API, income/expense classification, scoring, webhooks. | Global / MENA | Orbii is generic B2B underwriting; you are **Islamic + SME + Egypt/MENA-native** with Shariah governance. |
+
+**Global — Core banking and loan origination (indirect competitors / potential acquirers)**
+
+| Player | What they do | Your angle |
+|--------|---------------|------------|
+| **Temenos** | Loan origination, automated decisioning, core banking. Used by 950+ banks. | Banks use Temenos for core; you sit as **Islamic underwriting / decision layer** on top or alongside. Partnership or acquisition path. |
+| **Finastra** | Loan IQ (commercial/syndicated lending), servicing. | Same: you are **underwriting + Shariah logic** layer; Finastra does servicing. Partner or acquirer later. |
+| **FIS** | Core banking, card issuing, lending. | Same: you specialize in **partnership-based / Islamic underwriting**; FIS is infrastructure. |
+
+**Summary:** Direct competitors in “AI credit decisioning” in MENA include NymCard, Lean+Synapse, Qarar, Abwab.ai, Orbii. Agel and Halan are Islamic/SME lenders (you sell to banks that may compete with them). Your wedge: **Shariah-compliant / values-based underwriting API for banks** in Egypt then MENA, with Murabaha/SME focus and explainability. Core banking vendors (Temenos, Finastra, FIS) are partners or long-term acquirers rather than day-one competitors.
 
 ## Regulatory Strategy
 
@@ -630,6 +656,125 @@ Validate that your **product works** before you have any bank data:
 | **End-to-end flow** | Same synthetic data: "application in → decision + explanation out." Prove the pipeline works. |
 
 **First bank conversation:** Do not ask for production DB access. Propose: "We've validated on external/synthetic data. We'd like to run a **pilot**: you give us **anonymized/sample** data (or data in a **sandbox**), we run our engine and show you results. No integration into your production systems yet." Banks can provide anonymized export or sandbox; you run your engine and show accuracy, speed, explainability, Shariah logic.
+
+## Beyond the Tutorials: What You Still Need
+
+The tutorials give you strategy, product design, tech stack, GTM, and plan to $100M. To **execute** day-to-day and reach that valuation, you still need the following. Use this as a checklist and supplement with lawyers, advisors, and practice.
+
+### 1. Execution Playbooks (Build Roadmap)
+
+**What the tutorials give:** Architecture (Module 24), underwriting logic (Modules 21, 23, 27), GTM strategy (this module).
+
+**What you still need:** A concrete build roadmap—what to build in what order so you have a demo and then a pilot-ready product.
+
+| Phase | Outcome | Checklist |
+|-------|---------|-----------|
+| **Weeks 1–4** | Single flow working locally | One product (e.g. Murabaha SME); train model on public data (Lending Club/Kaggle); Shariah rules in code; API: `POST /underwrite` in → decision + explanation out; unit tests. |
+| **Weeks 5–6** | Demo-ready | Deploy API to free tier (Render/Railway/Fly.io); one-pager + 3-slide deck; synthetic data script (1k–10k rows) for demo. |
+| **Weeks 7–12** | Pilot-ready | Same API + auth (API key); rate limit; audit log (request/response, no PII); one-page “pilot proposal” (what you need from bank: anonymized sample, format, success metrics). |
+| **Months 4–6** | First pilot with bank | Run engine on bank’s anonymized/sandbox data; report: AUC, Gini, default prediction, explainability sample, Shariah logic; iterate once on feedback. |
+| **Months 6–12** | First paying client | Contract, SLA, support process; integrate with bank’s staging environment; go-live checklist (security, compliance, monitoring). |
+
+Break the above into **2-week sprints** with clear deliverables so you always have something to show.
+
+### 2. Legal & Incorporation
+
+**What the tutorials give:** Regulatory strategy (this module), compliance context (Modules 19, 21, 23).
+
+**What you still need:** Proper entity, contracts, and basic legal hygiene.
+
+| Item | Checklist |
+|------|-----------|
+| **Entity (Egypt)** | Choose structure (e.g. one-person company, LLC); register with GAFI; get tax ID; open company bank account. Use a local lawyer or incorporation service. |
+| **Founder agreement** | If co-founders: equity split, vesting, roles, IP assignment, leaving provisions. Get a lawyer. |
+| **NDAs** | Before sharing technical details with banks or partners: one-way or mutual NDA; template from lawyer; store signed copies. |
+| **Term sheet / investment** | When raising: term sheet (valuation, equity, board, key terms); use standard templates (e.g. NVCA-style) and a lawyer experienced in startup rounds. |
+| **Bank / client contract** | Pilot agreement (scope, data use, confidentiality, no production access without separate contract); then master service agreement + SLA for paying client. Lawyer review before signing. |
+| **IP** | Code and docs in your control; contributors sign IP assignment; no copying of third-party code without license. |
+
+Keep a **legal checklist** and budget (e.g. 5–10% of first raise) for incorporation and first round.
+
+### 3. Sales / BD in Practice
+
+**What the tutorials give:** Target markets, competitors, pricing, who to contact (this module).
+
+**What you still need:** How to run a first pilot and land a first contract.
+
+| Step | Checklist |
+|------|-----------|
+| **First meeting** | 15–30 min: problem, solution, demo (live or video); ask: “Would a pilot on anonymized data be interesting?” Not: “Can we have production access?” |
+| **Pilot proposal** | One-pager: what you need (e.g. 5k–10k anonymized applications + outcome); what you deliver (report: accuracy, explainability, Shariah logic); timeline (e.g. 6–8 weeks); no fee or symbolic fee. |
+| **Pilot execution** | Agree format and deadline; run engine; deliver report + 1-hour walkthrough; ask for one concrete next step (e.g. paid pilot, intro to credit committee). |
+| **From pilot to contract** | If they want to proceed: scope (volume, SLA, support); pricing (per decision or SaaS); legal (MSA + SLA); procurement process (they may have templates and security questionnaire). |
+| **Procurement** | Fill their vendor form; security questionnaire (hosting, encryption, access control); insurance if required; be patient—banks can take 2–6 months from pilot to signed contract. |
+
+Treat the first pilot as a **repeatable playbook**: same proposal format, same report structure, same follow-up questions so you can run it with multiple banks.
+
+### 4. Regulatory in Practice
+
+**What the tutorials give:** Multi-jurisdiction roadmap, Shariah governance (Modules 21, 23, 25).
+
+**What you still need:** Concrete steps for Egypt-specific channels.
+
+| Item | Checklist |
+|------|-----------|
+| **CBE Regulatory Sandbox** | Read current requirements on cbe.org.eg (Financial Technology → Regulatory Sandbox); prepare application (company, product, use case, no live customer funds at sandbox stage); submit; typical evaluation ~21 working days. Contact: reg.sandbox@cbe.org.eg. |
+| **FRA register (tech-based risk assessment)** | If you sell to non-bank financial firms in Egypt: check FRA register for “technology-based risk assessment” providers; requirements (e.g. capital, experience, documentation); apply if you qualify. |
+| **Shariah Supervisory Board (SSB)** | For Islamic positioning: appoint at least one Shariah scholar (or access via partner bank); document governance (how decisions are reviewed); keep paper trail for product rules (Murabaha, screening). |
+| **Data / privacy** | Know where data lives (Egypt vs cloud); comply with local data rules; in contracts, define data processor roles and confidentiality. |
+
+Revisit this checklist when you enter a new country (e.g. Saudi, UAE) for local regulator and Shariah requirements.
+
+### 5. Hiring & Team Building
+
+**What the tutorials give:** Team building in Module 26, cost notions in Plan to $100M (this module).
+
+**What you still need:** When to hire whom and how to run a small team.
+
+| Stage | Roles to add | Checklist |
+|-------|----------------|-----------|
+| **Pre–first bank** | Optional: technical co-founder or first engineer | If solo: you build MVP; if co-founder: clear role (e.g. you = product/GTM, them = eng). |
+| **First bank → first revenue** | First full-time hire: backend/ML or biz dev | Hire for the bottleneck: if you can’t build fast enough, hire eng; if you can’t get meetings, hire biz dev or outbound. |
+| **$500K–$1M ARR** | 2–4 more: eng, CS, compliance or sales | Document roles; simple KPIs (e.g. decisions/month, uptime, pilot conversions); weekly sync; keep culture “ship and learn.” |
+| **$1M+ ARR** | Country lead or head of sales when you expand | Hire for the new market; give clear ownership and targets. |
+
+**Culture:** Default to trust, clarity on priorities, and “done is better than perfect” for early stage. Document decisions (product, pricing, positioning) so new hires can onboard quickly.
+
+### 6. Founder / Fundraising Reality
+
+**What the tutorials give:** When to raise, how much equity, plan to $100M (this module).
+
+**What you still need:** Resilience and process when things don’t go as planned.
+
+| Reality | What to do |
+|---------|------------|
+| **Rejection from banks** | Normal. Ask for one concrete reason; iterate on product or positioning; try next bank or same bank in 6–12 months with more proof. |
+| **Rejection from investors** | Normal. Don’t argue; ask “What would need to be true for you to invest?” Use feedback to improve deck, metrics, or narrative; build more traction and re-approach. |
+| **Slow pilots** | Banks are slow. Set clear timelines in the pilot proposal; follow up politely; in parallel, run other pilots or apply to sandbox/accelerator. |
+| **When to pivot** | If after 12–18 months you have no pilot or no revenue: consider pivot (e.g. different segment, different geography, or different product slice). Use the same technical base; change GTM. |
+| **Fundraising process** | Target 5–10 serious conversations for a round; expect 1–2 to lead. Prepare: deck, financials, cap table, data room; run a tight process (e.g. 8–12 weeks) so you don’t drag. |
+
+Treat the plan to $100M as a **default path**, not a guarantee. Update milestones (e.g. “first bank by month X”) as you learn.
+
+### 7. Feedback Loop: How to Interpret No’s and Iterate
+
+**What the tutorials give:** Strategy, competitors, positioning (this module).
+
+**What you still need:** A simple system to turn feedback into changes.
+
+| Feedback type | Example | Iteration |
+|---------------|---------|-----------|
+| **“We don’t need this”** | Bank says they have in-house solution | Reframe: “We’re faster/cheaper/Shariah-native” or target banks that don’t have it; or add a use case they do need (e.g. SME only, or takaful). |
+| **“Too early / too risky”** | Investor says come back with traction | Get one pilot or one LOI; then re-approach with “We now have X.” |
+| **“Pricing too high”** | Bank balks at per-decision price | Offer pilot at discount or SaaS tier; stress ROI (cost vs manual underwriting); or start with one product/segment. |
+| **“We need feature Y”** | Bank wants Y before pilot | If Y is small, build it; if Y is large, propose Phase 1 without Y and Phase 2 with Y; don’t over-promise. |
+| **“Regulatory / compliance”** | Bank says legal or compliance blocked | Ask what exactly is needed (e.g. audit, certification, hosting); add to your regulatory checklist; address and re-approach. |
+
+**Ritual:** Every month, write down: top 3 “no’s” or objections, one change per objection (product, pitch, or target), and one experiment (e.g. “next 5 meetings we lead with ROI”). Review with a mentor or co-founder.
+
+---
+
+Use this section **with** the rest of the tutorial: strategy and plan from the modules, execution and gaps from this checklist. Revisit the checklist every quarter as you move from MVP → first bank → first revenue → scale.
 
 ## Key Success Metrics
 

@@ -4,12 +4,12 @@
 
 This comprehensive PhD-level tutorial covers cutting-edge applications of Artificial Intelligence, Natural Language Processing, and Agentic AI systems to financial analysis, trading, risk management, **advanced underwriting**, **Islamic finance**, and regulatory compliance. Designed for researchers, quantitative analysts, practitioners, and **fintech entrepreneurs** seeking mastery of state-of-the-art techniques in computational finance and building world-class financial AI systems.
 
-**🆕 NEW: Advanced Underwriting & Islamic Finance Track (Modules 21-26)**
+**🆕 NEW: Advanced Underwriting & Islamic Finance Track (Modules 21-27)**
 - Complete guide to building an AI underwriting startup
 - PhD-level coverage of credit and insurance underwriting
 - First-ever comprehensive Islamic finance AI curriculum
 - Production system architecture and go-to-market strategy
-- Path from research to $100M ARR fintech company
+- Path from research to $100M ARR and $100M valuation (5–8 year plan)
 
 ## Research Focus Areas
 
@@ -267,11 +267,16 @@ This tutorial emphasizes emerging research directions including:
 25. **[Building an AI Underwriting Startup - Part II: Go-To-Market](25-underwriting-startup-gtm.md)** 🚀
 
     - **Product-Market Fit** (SME lending, Islamic finance, embedded finance)
+    - **Current Competitors in the Market** (NymCard, Agel, Halan, Lean+Synapse, Qarar, Abwab.ai, Orbii; Temenos, Finastra, FIS)
     - **Regulatory Strategy** (multi-jurisdiction compliance roadmap)
     - **Partnership Models** (data, distribution, technology, Islamic finance)
     - **Pricing and Unit Economics** (per-decision, SaaS, revenue share)
     - **Sales and Distribution** (B2B enterprise, PLG, channel partnerships)
     - **Customer Success** (onboarding, health scoring, optimization)
+    - **Post-MVP: Finding Advisors, Investors, and Bank Partners** (accelerators, investors, associations, Egypt banks; people to reach)
+    - **When to Raise and What to Offer** (bootstrap to first bank then raise; equity 12–25%; minimal budget)
+    - **Plan to $100M Valuation (5–8 Years)** (year-by-year milestones, revenue targets, geography, capital)
+    - **Beyond the Tutorials: What You Still Need** (execution playbooks, legal/incorporation, sales/BD in practice, regulatory in practice, hiring & team, founder/fundraising reality, feedback loop)
     - Key metrics for $100M ARR
 
 26. **[Advanced Research Frontiers and Future Directions](26-research-frontiers.md)** 🔬 ✨
@@ -709,7 +714,7 @@ This tutorial provides a comprehensive PhD-level journey from financial fundamen
 
 ### Path to $100M ARR Underwriting Startup
 
-This tutorial (especially Modules 21-26) provides everything you need:
+This tutorial (especially Modules 21-27) provides everything you need:
 
 1. **Technical Foundation** (Modules 21-22, 24): Build production ML systems
 2. **Domain Expertise** (Modules 21-23): Master credit, insurance, Islamic finance
@@ -718,7 +723,7 @@ This tutorial (especially Modules 21-26) provides everything you need:
 5. **Team Building** (Module 26): Hire world-class talent
 6. **Research Edge** (Module 26): Stay ahead with cutting-edge techniques
 
-**Timeline**: 5 years from launch to $100M ARR with focused execution.
+**Timeline**: 5–8 years from launch to $100M ARR and $100M valuation with focused execution (see Module 25 Plan to $100M Valuation). Expected scale by year 5: 4–6 banks, $1M–$2.5M ARR (base case); exit path: acquisition by core banking vendor or bank, or secondary sale (Module 25).
 
 ### Global Impact
 
