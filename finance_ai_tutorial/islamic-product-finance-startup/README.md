@@ -4,6 +4,21 @@ Product-based financing AI for Islamic finance, designed to work for both Sharia
 
 ---
 
+## PhD-Level Tutorial: Shariah Compliance & Business Knowledge
+
+| Module | Title |
+|--------|-------|
+| [00-index](00-index.md) | Tutorial index and learning path |
+| [01-shariah-foundations](01-shariah-foundations.md) | Riba, Gharar, Maysir, Maqasid |
+| [02-islamic-finance-structures](02-islamic-finance-structures.md) | Murabaha, Musharakah, Mudarabah, Ijarah |
+| [03-shariah-governance-standards](03-shariah-governance-standards.md) | AAOIFI, IFSB, SSB |
+| [04-product-based-financing-shariah](04-product-based-financing-shariah.md) | Trade finance, product risk taxonomy |
+| [05-shariah-ai-governance](05-shariah-ai-governance.md) | Gen AI, data provenance, SSB-auditable AI |
+| [06-business-landscape](06-business-landscape.md) | Islamic banking market, commercial models |
+| [07-regulatory-environment](07-regulatory-environment.md) | Regulatory bodies, licensing, cross-border |
+
+---
+
 ## 1. Product-Based vs Fixed-Rate Lending
 
 ### Benefits
@@ -196,4 +211,4 @@ Build a **product/asset risk engine** that outputs asset risk tier, recommended 
 
 ---
 
-*Document synthesizes discussion on Islamic finance, product-based lending, and AI-driven underwriting. See `27-advanced-islamic-finance-ai.md` for technical implementation.*
+*Document synthesizes discussion on Islamic finance, product-based lending, and AI-driven underwriting. See [27-advanced-islamic-finance-ai](../27-advanced-islamic-finance-ai.md) for technical implementation.*
